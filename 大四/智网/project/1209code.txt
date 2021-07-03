@@ -1,0 +1,228 @@
+import bluetooth
+
+import bluetooth._bluetooth as bluez
+
+import time
+
+?
+
+from bluetooth import * 
+
+?
+
+device = discover_devices(lookup_names=True)
+
+discover_devices(lookup_names=True)
+
+[]
+
+import pybtlemon
+
+def callback(addr, rssi):
+
+    print(f"addr: {addr}, distance: {10**((-60-rssi)/20):.2f}")
+
+pybtlemon.set_callback(callback)
+
+pybtlemon.run()
+
+---------------------------------------------------------------------------
+ModuleNotFoundError                       Traceback (most recent call last)
+<ipython-input-49-30cac0bdbed3> in <module>
+----> 1 import pybtlemon
+      2 def callback(addr, rssi):
+      3     print(f"addr: {addr}, distance: {10**((-60-rssi)/20):.2f}")
+      4 pybtlemon.set_callback(callback)
+      5 pybtlemon.run()
+
+ModuleNotFoundError: No module named 'pybtlemon'
+
+?
+
+while(1): 
+
+    time.sleep(3)
+
+    nearby_devices = bluetooth.discover_devices(lookup_names=True)
+
+    print("Found {} devices.".format(len(nearby_devices)))
+
+    for addr, name in nearby_devices:
+
+        print("  {} - {}".format(addr, name))
+
+---------------------------------------------------------------------------
+KeyboardInterrupt                         Traceback (most recent call last)
+<ipython-input-23-75f2d5aec60d> in <module>
+      1 while(1):
+      2     time.sleep(3)
+----> 3     nearby_devices = bluetooth.discover_devices(lookup_names=True)
+      4     print("Found {} devices.".format(len(nearby_devices)))
+      5     for addr, name in nearby_devices:
+
+/usr/local/lib/python3.7/dist-packages/bluetooth/bluez.py in discover_devices(duration, flush_cache, lookup_names, lookup_class, device_id, iac)
+     23         results = _bt.hci_inquiry (sock, duration=duration, flush_cache=True,
+     24                                    lookup_class=lookup_class, device_id=device_id,
+---> 25                                    iac=iac)
+     26     except _bt.error as e:
+     27         sock.close ()
+
+KeyboardInterrupt: 
+
+from bluepy.btle import Scanner
+
+?
+
+while True:
+
+    try:
+
+        #10.0 sec scanning
+
+        ble_list = Scanner().scan(10.0)
+
+        for dev in ble_list:
+
+            print("rssi: {} ; mac: {}".format(dev.rssi,dev.name))
+
+    except:
+
+        raise Exception("Error occured")
+
+---------------------------------------------------------------------------
+KeyboardInterrupt                         Traceback (most recent call last)
+<ipython-input-38-2c9c008efde2> in <module>
+      5         #10.0 sec scanning
+----> 6         ble_list = Scanner().scan(10.0)
+      7         for dev in ble_list:
+
+/usr/local/lib/python3.7/dist-packages/bluepy/btle.py in scan(self, timeout, passive)
+    852         self.start(passive=passive)
+--> 853         self.process(timeout)
+    854         self.stop()
+
+/usr/local/lib/python3.7/dist-packages/bluepy/btle.py in process(self, timeout)
+    820                 remain = None
+--> 821             resp = self._waitResp(['scan', 'stat'], remain)
+    822             if resp is None:
+
+/usr/local/lib/python3.7/dist-packages/bluepy/btle.py in _waitResp(self, wantType, timeout)
+    341             if timeout:
+--> 342                 fds = self._poller.poll(timeout*1000)
+    343                 if len(fds) == 0:
+
+KeyboardInterrupt: 
+
+During handling of the above exception, another exception occurred:
+
+Exception                                 Traceback (most recent call last)
+<ipython-input-38-2c9c008efde2> in <module>
+      8             print("rssi: {} ; mac: {}".format(dev.rssi,dev.name))
+      9     except:
+---> 10         raise Exception("Error occured")
+
+Exception: Error occured
+
+ble_list = Scanner().scan(10.0)
+
+for dev in ble_list:
+
+    print("rssi: {} ; mac: {}".format(dev.rssi,dev.addr))
+
+rssi: -90 ; mac: 20:79:18:34:b7:c2
+rssi: -90 ; mac: 1e:ae:2c:2a:f3:78
+rssi: -94 ; mac: 4d:a0:85:41:77:06
+rssi: -79 ; mac: 19:a6:15:c8:46:f0
+rssi: -92 ; mac: 76:a7:d5:90:2a:19
+rssi: -81 ; mac: 4e:99:a8:1f:48:b0
+rssi: -89 ; mac: 5a:e7:78:aa:f5:e1
+rssi: -98 ; mac: 79:ff:94:a5:0a:0d
+rssi: -94 ; mac: 1e:2c:b0:15:19:07
+rssi: -91 ; mac: 4b:ab:50:4f:45:e4
+rssi: -29 ; mac: de:9c:6e:b7:20:0f
+rssi: -89 ; mac: 3d:66:f6:0d:52:db
+rssi: -94 ; mac: 34:9e:a4:e7:d1:d5
+rssi: -92 ; mac: 4f:33:49:7a:59:e4
+rssi: -97 ; mac: 46:18:4c:65:92:fb
+rssi: -96 ; mac: 7e:43:95:ab:02:ae
+rssi: -86 ; mac: 72:d1:48:a5:fa:d6
+rssi: -91 ; mac: 66:2a:1e:bc:7e:2f
+rssi: -97 ; mac: c0:09:0a:20:20:5e
+rssi: -96 ; mac: 60:ab:d2:19:b7:8f
+rssi: -95 ; mac: 60:ab:d2:19:d6:a8
+rssi: -103 ; mac: c4:63:69:20:8e:83
+
+import bluetooth
+
+import bluetooth._bluetooth as bluez 
+
+import sys
+
+dev_id = 0
+
+?
+
+try:
+
+    sock = bluez.hci_open_dev(dev_id)
+
+except:
+
+    print('Error accessing bluetooth device.')
+
+    sys.exit(1)
+
+?
+
+pkt = sock.recv(255)
+
+ptype, event, plen = struct.unpack("BBB", pkt[:3])
+
+print("Event: {}".format(event))
+
+?
+
+?
+
+if event == bluez.EVT_INQUIRY_RESULT_WITH_RSSI:
+
+    pkt = pkt[3:]
+
+    nrsp = bluetooth.get_byte(pkt[0])
+
+    for i in range(nrsp):
+
+        addr = bluez.ba2str(pkt[1+6*i:1+6*i+6])
+
+        rssi = bluetooth.byte_to_signed_int(
+
+               bluetooth.get_byte(pkt[1 + 13 * nrsp + i]))
+
+        results.append((addr, rssi))
+
+        print("[{}] RSSI: {}".format(addr, rssi))
+
+?
+
+---------------------------------------------------------------------------
+KeyboardInterrupt                         Traceback (most recent call last)
+<ipython-input-31-a404932a2fb4> in <module>
+     10     sys.exit(1)
+     11 
+---> 12 pkt = sock.recv(255)
+     13 ptype, event, plen = struct.unpack("BBB", pkt[:3])
+     14 print("Event: {}".format(event))
+
+KeyboardInterrupt: 
+
+?
+
+import sys
+
+dev_id = 0
+
+sock = bluez.hci_open_dev(dev_id)
+
+sock.recv(255)
+
+-------------------------------------------------------------------
