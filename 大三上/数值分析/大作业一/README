@@ -1,0 +1,9 @@
+数值分析与算法 第一次大作业                  2017010928 屈晨迪 自71
+
+1. 压缩包中包含三部分文件，其中NAhw1.zip是程序源代码，report.pdf是实验报告，
+data.zip是测试集数据，包括必做和选做部分的输入和部分输出数据；
+
+2. 本次大作业是于VS2012平台上使用C#编写的Windows应用程序，编译和运行于
+.NET Framework 4.5，程序已安装OpenCvSharp3包；
+
+3. 将NAhw1.zip解压后，在NAhw1\bin\Debug目录下双击NAhw1.exe即可运行程序。
