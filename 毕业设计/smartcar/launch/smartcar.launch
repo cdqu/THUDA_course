@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="smartcar" type="velocity_pub" name="velocity_pub"></node>
+    <!--node pkg="smartcar" type="chaseCar_ROS" name="chase_car" output="screen"></node-->
+    <node pkg="smartcar" type="traj_estimator" name="traj_estimator" output="screen"></node>
+</launch>

@@ -1,0 +1,219 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" 
+    xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+        xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+        xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+    name="smartcar_xacro">
+
+
+    <xacro:property name="length_wheel" value="0.05" />
+    <xacro:property name="radius_wheel" value="0.05" />
+    <xacro:macro name="default_inertial" params="mass">
+               <inertial>
+                       <mass value="${mass}" />
+                       <inertia ixx="1.0" ixy="0.0" ixz="0.0"
+                                iyy="1.0" iyz="0.0"
+                                izz="1.0" />
+               </inertial>
+    </xacro:macro>
+
+    <link name="base_footprint">
+        <visual>
+            <geometry>
+                    <box size="0.001 0.001 0.001"/>
+                </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </visual>
+        <xacro:default_inertial mass="0.0001"/>
+    </link>
+    <joint name="base_footprint_joint" type="fixed">
+        <origin xyz="0 0 0" />
+        <parent link="base_footprint" />
+        <child link="base_link" />
+    </joint>
+
+
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="0.25 .16 .05"/>
+            </geometry>
+            <origin rpy="0 0 1.57075" xyz="0 0 0.05"/>
+            <material name="blue">
+                <color rgba="0 .5 .8 1"/>
+            </material>
+        </visual>
+        <collision>
+            <geometry>
+                    <box size="0.2 .3 0.1"/>
+            </geometry>
+        </collision>
+        <xacro:default_inertial mass="10"/>
+    </link>
+
+    <gazebo reference="base_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+    <link name="right_front_wheel">  
+        <visual>  
+            <geometry>  
+                <cylinder length=".03" radius="0.025"/>  
+            </geometry>  
+            <material name="black">  
+                <color rgba="0 0 0 1"/>  
+            </material>  
+        </visual>  
+        <collision>
+            <geometry>
+                    <cylinder length=".03" radius="0.025"/>
+            </geometry>
+        </collision>
+        <xacro:default_inertial mass="1"/>
+    </link>  
+    
+    <link name="right_back_wheel">  
+        <visual>  
+        <geometry>  
+            <cylinder length=".03" radius="0.025"/>  
+        </geometry>  
+        <material name="black">  
+            <color rgba="0 0 0 1"/>  
+        </material>  
+        </visual>  
+        <collision>
+            <geometry>
+                    <cylinder length=".03" radius="0.025"/>
+            </geometry>
+        </collision>
+        <xacro:default_inertial mass="1"/>
+    </link>  
+    
+    <link name="left_front_wheel">  
+        <visual>  
+            <geometry>  
+                <cylinder length=".03" radius="0.025"/>  
+            </geometry>  
+            <material name="black">  
+                <color rgba="0 0 0 1"/>  
+            </material>  
+        </visual>  
+        <collision>
+            <geometry>
+                    <cylinder length=".03" radius="0.025"/>
+            </geometry>
+        </collision>
+        <xacro:default_inertial mass="1"/>
+    </link>      
+    
+    <link name="left_back_wheel">  
+        <visual>  
+            <geometry>  
+                <cylinder length=".03" radius="0.025"/>  
+            </geometry>  
+            <material name="black">  
+                <color rgba="0 0 0 1"/>  
+            </material>  
+        </visual>  
+        <collision>
+            <geometry>
+                    <cylinder length=".03" radius="0.025"/>
+            </geometry>
+        </collision>
+        <xacro:default_inertial mass="1"/>
+    </link>      
+    
+    <link name="head">  
+        <visual>  
+            <geometry>  
+                <box size=".02 .03 .03"/>  
+            </geometry>  
+            <material name="white">
+                <color rgba="1 1 1 1"/>  
+            </material>  
+        </visual>  
+    </link>  
+    <gazebo reference="head">
+        <material>Gazebo/Yellow</material>
+    </gazebo>
+    
+
+    <joint name="right_front_wheel_joint" type="continuous">  
+        <axis xyz="0 0 1"/>  
+        <parent link="base_link"/>  
+        <child link="right_front_wheel"/>  
+        <origin rpy="0 1.57075 0" xyz="0.08 0.1 0.025"/>  
+        <limit effort="100" velocity="100"/>  
+        <joint_properties damping="0.0" friction="0.0"/>  
+    </joint>  
+
+    <joint name="right_back_wheel_joint" type="continuous">  
+        <axis xyz="0 0 1"/>  
+        <parent link="base_link"/>  
+        <child link="right_back_wheel"/>  
+        <origin rpy="0 1.57075 0" xyz="0.08 -0.1 0.025"/>  
+        <limit effort="100" velocity="100"/>  
+        <joint_properties damping="0.0" friction="0.0"/>  
+    </joint>  
+
+    <joint name="left_front_wheel_joint" type="continuous">  
+        <axis xyz="0 0 1"/>  
+        <parent link="base_link"/>  
+        <child link="left_front_wheel"/>  
+        <origin rpy="0 1.57075 0" xyz="-0.08 0.1 0.025"/>  
+        <limit effort="100" velocity="100"/>  
+        <joint_properties damping="0.0" friction="0.0"/>  
+    </joint>  
+
+    <joint name="left_back_wheel_joint" type="continuous">  
+        <axis xyz="0 0 1"/>  
+        <parent link="base_link"/>  
+        <child link="left_back_wheel"/>  
+        <origin rpy="0 1.57075 0" xyz="-0.08 -0.1 0.025"/>  
+        <limit effort="100" velocity="100"/>  
+        <joint_properties damping="0.0" friction="0.0"/>  
+    </joint>  
+
+    <joint name="tobox" type="fixed">  
+        <parent link="base_link"/>  
+        <child link="head"/>  
+        <origin xyz="0 0.08 0.075"/>  
+    </joint>
+
+
+  <!-- Drive controller -->
+<gazebo>
+  <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+    <updateRate>100.0</updateRate>
+    <robotNamespace>/</robotNamespace>
+    <leftFrontJoint>right_front_wheel_joint</leftFrontJoint>
+    <rightFrontJoint>right_back_wheel_joint</rightFrontJoint>
+    <leftRearJoint>left_front_wheel_joint</leftRearJoint>
+    <rightRearJoint>left_back_wheel_joint</rightRearJoint>
+    <wheelSeparation>4</wheelSeparation>
+    <wheelDiameter>0.05</wheelDiameter>
+    <robotBaseFrame>base_link</robotBaseFrame>
+    <torque>1</torque>
+    <commandTopic>cmd_vel</commandTopic>
+    <broadcastTF>1</broadcastTF>
+    <odometryTopic>odom</odometryTopic>
+    <odometryFrame>odom</odometryFrame>
+    <odometrySource>world</odometrySource>
+    <publishOdomTF>true</publishOdomTF>
+    <topicName>cmd_vel</topicName>
+    <robotBaseFrame>base_footprint</robotBaseFrame>
+  </plugin>
+</gazebo>
+
+
+<!-- ros_control plugin -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/robot</robotNamespace>
+      <legacyModeNS>true</legacyModeNS>
+    </plugin>
+  </gazebo>  
+
+
+</robot>

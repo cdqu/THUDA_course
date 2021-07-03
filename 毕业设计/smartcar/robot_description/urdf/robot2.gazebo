@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<robot>
+  <!-- materials -->
+  <gazebo reference="base_link">
+      <material>Gazebo/Red</material>
+  </gazebo>
+
+  <gazebo reference="camera_link">
+      <material>Gazebo/Yellow</material>
+  </gazebo>
+
+  <!-- ros_control plugin -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/robot2</robotNamespace>
+	
+    </plugin>
+  </gazebo>
+
+</robot>

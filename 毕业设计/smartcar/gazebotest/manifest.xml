@@ -1,0 +1,16 @@
+<package>
+  <description brief="gazebotest">
+
+     gazebotest
+
+  </description>
+  <author>qucd</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/gazebotest</url>
+  <depend package="urdf"/>
+  <depend package="xacro"/>
+
+</package>
+
+

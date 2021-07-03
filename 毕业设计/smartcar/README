@@ -1,0 +1,16 @@
+roscore
+
+export ROS_PACKAGE_PATH=${ROS_PACKAGE_PATH}:/home/qucd/test_ws/src/smartcar/gazebotest
+
+roslaunch gazebotest gazebo.launch
+
+rosrun smartcar chaseCar_ROS 
+
+roslaunch smartcar smartcar.launch
+
+
+
+
+
+rosrun smartcar Hybrid_Astar /home/qucd/test_ws/src/smartcar/map/param.cfg
+
