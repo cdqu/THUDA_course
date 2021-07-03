@@ -1,0 +1,7 @@
+计算机网络大作业                             2017010928 屈晨迪 自71
+1.本次程序使用c#编写，运行在VS2017.NET Framework 4.6.1上；
+
+2.作业文件中包含两部分内容，其中mychat.zip是工程源代码，report.pdf
+是报告；
+
+3.解压工程文件后，点击mychat\bin\Debug\mychat.exe即可运行程序。
