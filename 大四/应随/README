@@ -1,0 +1,6 @@
+随机游走PageRank
+
+三个.py文件均为实验仿真代码
+
+code.py为迭代法求解PR值；code2.py调用了neworkx库求解，并绘制了报告中的点线图；
+MapReduce.py为使用MapReduce算法求解PR值
