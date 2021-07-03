@@ -1,2 +1,10 @@
 强化学习
 Mountain Car
+1. 作业包中共三类文件，其中code是全部.py代码文件，report.pdf为报
+告，录屏.mp4是小车登顶视频
+
+2. 本次作业解决了离散和连续两类问题，其中离散问题使用4种方法，包括
+q-learning,SARSA,SARSA(lambda)和DQN，连续问题使用q-learning
+
+3. 代码运行环境为
+    python(3.6)+gym(0.15.4)+tensorflow(1.2.1)+keras(2.2.4)
